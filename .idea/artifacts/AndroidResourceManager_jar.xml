@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="AndroidResourceManager:jar">
+    <output-path>$PROJECT_DIR$/jar</output-path>
+    <root id="archive" name="AndroidResourceManager.jar">
+      <element id="module-output" name="AndroidResourceManager" />
+    </root>
+  </artifact>
+</component>
