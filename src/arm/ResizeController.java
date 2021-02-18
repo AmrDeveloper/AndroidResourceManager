@@ -12,41 +12,41 @@ import javafx.scene.input.TransferMode;
 
 import java.io.File;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class ResizeController implements Initializable {
 
-    public ImageView previewImageView;
-    public TextField pathTextField;
+    // Preview Views
+    @FXML private ImageView previewImageView;
 
     // Options
-    public CheckBox idpiCheckBox;
-    public CheckBox mdpiCheckBox;
-    public CheckBox tvdpiCheckBox;
-    public CheckBox hdpiCheckBox;
-    public CheckBox xhdpiCheckBox;
-    public CheckBox xxhdpiCheckBox;
-    public CheckBox xxxhdpiCheckBox;
-    public ComboBox<String> imageTypeComboBox;
+    @FXML private ComboBox<String> imageTypeComboBox;
 
     // State
-    public ProgressBar stateProgressBar;
+    @FXML private ProgressBar stateProgressBar;
 
-    // Actions
-    public Button outputPathButton;
-    public Button clearSelectedImageButton;
-    public Button clearAllImagesAction;
-    public Button resizeButton;
+    // Image Sizes Views
+    @FXML private TextField heightTextField;
+    @FXML private TextField widthTextField;
+    @FXML private Button addSizeButton;
+    @FXML private Button clearSizeButton;
+    @FXML private ListView<ImageSize> imageSizesListView;
 
-    public ListView<File> imagesListView;
+    // Image List Views
+    @FXML private TextField pathTextField;
+    @FXML private Button outputPathButton;
+    @FXML private Button clearSelectedImageButton;
+    @FXML private Button clearAllImagesAction;
+    @FXML private Button resizeButton;
+    @FXML private ListView<File> imagesListView;
 
-    private final List<File> imagesFiles = new ArrayList<>();
+    private final List<File> mImagesFilesList = new ArrayList<>();
+    private final Set<ImageSize> mImagesSizeSet = new HashSet<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         imageListViewSetup();
+        this.imageSizesListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
     }
 
     @FXML
@@ -61,7 +61,7 @@ public class ResizeController implements Initializable {
     private void onImageDragDropped(DragEvent event) {
         List<File> currentDropped = event.getDragboard().getFiles();
         for(File imageFile : currentDropped) {
-            this.imagesFiles.add(imageFile);
+            this.mImagesFilesList.add(imageFile);
             this.imagesListView.getItems().add(imageFile);
         }
         event.setDropCompleted(true);
@@ -74,14 +74,44 @@ public class ResizeController implements Initializable {
         for (int i = selectedImagesIndex.size() - 1; i > -1; i--) {
             int currentIndex = selectedImagesIndex.get(i);
             this.imagesListView.getItems().remove(currentIndex);
-            this.imagesFiles.remove(currentIndex);
+            mImagesFilesList.remove(currentIndex);
         }
     }
 
     @FXML
     private void onImagesListClearAllItems() {
-        this.imagesFiles.clear();
+        mImagesFilesList.clear();
         this.imagesListView.getItems().clear();
+    }
+
+    @FXML
+    private void addImageSize() {
+        String height = heightTextField.getText();
+        String width = widthTextField.getText();
+
+        if(height.isEmpty() || width.isEmpty()) return;
+
+        if(!ValidationUtils.isInteger(height)
+                || !ValidationUtils.isInteger(width))
+            return;
+
+        int iHeight = Integer.parseInt(height);
+        int iWidth = Integer.parseInt(width);
+        ImageSize imageSize = new ImageSize(iHeight, iWidth);
+
+        boolean isUnique = mImagesSizeSet.add(imageSize);
+        if(isUnique) {
+            imageSizesListView.getItems().add(imageSize);
+            heightTextField.clear();
+            widthTextField.clear();
+        }
+    }
+
+    @FXML
+    private void clearSelectedImageSize() {
+        ObservableList<ImageSize> selectedImageSizes = imageSizesListView.getSelectionModel().getSelectedItems();
+        mImagesSizeSet.removeAll(selectedImageSizes);
+        imageSizesListView.getItems().removeAll(selectedImageSizes);
     }
 
     private void imageListViewSetup() {
@@ -95,17 +125,5 @@ public class ResizeController implements Initializable {
             Image image = new Image(file.toURI().toString());
             previewImageView.setImage(image);
         });
-    }
-
-    private boolean[] getImageSizesOptions() {
-        boolean[] sizeOption = new boolean[7];
-        sizeOption[0] = idpiCheckBox.isSelected();
-        sizeOption[1] = mdpiCheckBox.isSelected();
-        sizeOption[2] = tvdpiCheckBox.isSelected();
-        sizeOption[3] = hdpiCheckBox.isSelected();
-        sizeOption[4] = xhdpiCheckBox.isSelected();
-        sizeOption[5] = xxhdpiCheckBox.isSelected();
-        sizeOption[5] = xxxhdpiCheckBox.isSelected();
-        return sizeOption;
     }
 }
