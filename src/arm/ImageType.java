@@ -6,7 +6,7 @@ public enum ImageType {
     MIPMAP("Mipmap"),
     OTHER("Other");
 
-    private String name;
+    private final String name;
 
     ImageType(String name) {
         this.name = name;

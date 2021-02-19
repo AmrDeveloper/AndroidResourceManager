@@ -9,6 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
@@ -91,6 +92,44 @@ public class ResizeController implements Initializable {
     }
 
     @FXML
+    private void resizeButtonAction() {
+        String outputPath = pathTextField.getText();
+        if(outputPath.isEmpty()) return;
+
+        File outputPathFile = new File(outputPath);
+        if(!outputPathFile.exists()) {
+            AlertManager.showErrorDialog("Resize Action",
+                    "Output Path",
+                    "Output Path not exists.");
+            return;
+        }
+
+        if(!outputPathFile.isDirectory()) {
+            AlertManager.showErrorDialog("Resize Action",
+                    "Output Path",
+                    "Output Path must be Directory.");
+            return;
+        }
+
+        ImageType imageType = imageTypeComboBox.getSelectionModel().getSelectedItem();
+        ResizeOrder resizeOrder = new ResizeOrder(mImagesFilesList, mImagesSizeSet, imageType, outputPathFile);
+    }
+
+    @FXML
+    private void findOutputDirectoryPath() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Output Directory Path");
+        File output = fileChooser.showSaveDialog(null);
+        if(output != null) {
+            pathTextField.setText(output.getPath());
+        } else {
+            AlertManager.showErrorDialog("Output Directory",
+                    "Output Directory Path",
+                    "Invalid Output Directory Path.");
+        }
+    }
+
+    @FXML
     private void onImagesListClearSelectedItems() {
         List<Integer> selectedImagesIndex = imagesListView.getSelectionModel().getSelectedIndices();
         for (int i = selectedImagesIndex.size() - 1; i > -1; i--) {
@@ -111,11 +150,20 @@ public class ResizeController implements Initializable {
         String height = heightTextField.getText();
         String width = widthTextField.getText();
 
-        if(height.isEmpty() || width.isEmpty()) return;
+        if(height.isEmpty() || width.isEmpty()) {
+            AlertManager.showErrorDialog("Add Size Action",
+                    "Image Size",
+                    "Height and Width can't be empty.");
+            return;
+        }
 
         if(!ValidationUtils.isInteger(height)
-                || !ValidationUtils.isInteger(width))
+                || !ValidationUtils.isInteger(width)) {
+            AlertManager.showErrorDialog("Add Size Action",
+                    "Image Size",
+                    "Height and Width must be integers.");
             return;
+        }
 
         int iHeight = Integer.parseInt(height);
         int iWidth = Integer.parseInt(width);
