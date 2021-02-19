@@ -20,7 +20,7 @@ public class ResizeController implements Initializable {
     @FXML private ImageView previewImageView;
 
     // Options
-    @FXML private ComboBox<String> imageTypeComboBox;
+    @FXML private ComboBox<ImageType> imageTypeComboBox;
 
     // State
     @FXML private ProgressBar stateProgressBar;
@@ -40,8 +40,8 @@ public class ResizeController implements Initializable {
     @FXML private Button resizeButton;
     @FXML private ListView<File> imagesListView;
 
-    private final static List<File> mImagesFilesList = new ArrayList<>();
-    private final static Set<ImageSize> mImagesSizeSet = new HashSet<>();
+    private final List<File> mImagesFilesList = new ArrayList<>();
+    private final Set<ImageSize> mImagesSizeSet = new HashSet<>();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -49,7 +49,7 @@ public class ResizeController implements Initializable {
         sizeListViewSetup();
         setViewsTooltip();
 
-        imageTypeComboBox.getItems().addAll("DRAWABLE", "MIP_MAP", "Other");
+        imageTypeComboBox.getItems().addAll(ImageType.values());
         imageTypeComboBox.getSelectionModel().select(0);
     }
 
