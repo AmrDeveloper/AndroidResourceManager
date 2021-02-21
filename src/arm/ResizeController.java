@@ -122,10 +122,6 @@ public class ResizeController implements Initializable {
         File output = fileChooser.showSaveDialog(null);
         if(output != null) {
             pathTextField.setText(output.getPath());
-        } else {
-            AlertManager.showErrorDialog("Output Directory",
-                    "Output Directory Path",
-                    "Invalid Output Directory Path.");
         }
     }
 
