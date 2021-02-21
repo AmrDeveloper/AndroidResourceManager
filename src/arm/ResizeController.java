@@ -1,5 +1,6 @@
 package arm;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +16,7 @@ import java.io.File;
 import java.net.URL;
 import java.util.*;
 
-public class ResizeController implements Initializable {
+public class ResizeController implements Initializable, OnProgressListener {
 
     // Preview Views
     @FXML private ImageView previewImageView;
@@ -115,7 +116,7 @@ public class ResizeController implements Initializable {
 
         ImageType imageType = imageTypeComboBox.getSelectionModel().getSelectedItem();
         ResizeOrder resizeOrder = new ResizeOrder(mImagesFilesList, mImagesSizeSet, imageType, outputPathFile);
-        mResizeManager.resize(resizeOrder);
+        new Thread(() -> mResizeManager.resize(resizeOrder, ResizeController.this)).start();
     }
 
     @FXML
@@ -209,5 +210,10 @@ public class ResizeController implements Initializable {
             Image image = new Image(file.toURI().toString());
             previewImageView.setImage(image);
         });
+    }
+
+    @Override
+    public void onProcessChange(float progress) {
+        Platform.runLater(() -> stateProgressBar.setProgress(progress));
     }
 }

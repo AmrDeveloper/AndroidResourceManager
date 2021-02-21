@@ -18,13 +18,18 @@ public class ResizeManager {
         return mInstance;
     }
 
-    public void resize(ResizeOrder order) {
+    public void resize(ResizeOrder order, OnProgressListener listener) {
         Map<ImageSize, File> outputDirectories = generateOutputDirectories(
                 order.getOutputDirectory(),
                 order.getSizeSet(),
                 order.getImageType());
+
+        float progress = 0;
+        int orderSize = order.getImageList().size();
         for (File image : order.getImageList()) {
             resizeImage(image, order.getSizeSet(), outputDirectories);
+            progress += 1;
+            listener.onProcessChange(progress / orderSize);
         }
     }
 
