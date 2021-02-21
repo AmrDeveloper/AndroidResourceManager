@@ -10,7 +10,7 @@ public class ArmApplication extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("main_view.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("resize_view.fxml"));
         primaryStage.setTitle("Android Resource Manager - ARM");
         Scene mainScene = new Scene(root, 600, 400);
         primaryStage.setScene(mainScene);

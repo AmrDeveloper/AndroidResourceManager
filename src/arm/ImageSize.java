@@ -16,7 +16,7 @@ public class ImageSize {
     public ImageSize(int height, int width, String hint) {
         this.height = height;
         this.width = width;
-        this.hint = "(" + hint + ")";
+        this.hint = hint;
     }
 
     public int getHeight() {
@@ -29,6 +29,11 @@ public class ImageSize {
 
     public String getHint() {
         return hint;
+    }
+
+    public String sizeString() {
+        if(height == width) return String.valueOf(height);
+        return height + "_" + width;
     }
 
     @Override
@@ -46,7 +51,7 @@ public class ImageSize {
 
     @Override
     public String toString() {
-        return height + "x" + width + " pixels" + hint;
+        return height + "x" + width + " pixels (" + hint + ")";
     }
 
 }

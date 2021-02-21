@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.stage.FileChooser;
+import javafx.stage.DirectoryChooser;
 
 import java.io.File;
 import java.net.URL;
@@ -43,6 +43,8 @@ public class ResizeController implements Initializable {
 
     private final List<File> mImagesFilesList = new ArrayList<>();
     private final Set<ImageSize> mImagesSizeSet = new HashSet<>();
+
+    private final ResizeManager mResizeManager = ResizeManager.getInstance();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -113,13 +115,14 @@ public class ResizeController implements Initializable {
 
         ImageType imageType = imageTypeComboBox.getSelectionModel().getSelectedItem();
         ResizeOrder resizeOrder = new ResizeOrder(mImagesFilesList, mImagesSizeSet, imageType, outputPathFile);
+        mResizeManager.resize(resizeOrder);
     }
 
     @FXML
     private void findOutputDirectoryPath() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Output Directory Path");
-        File output = fileChooser.showSaveDialog(null);
+        DirectoryChooser directoryChooser = new DirectoryChooser();
+        directoryChooser.setTitle("Output Directory Path");
+        File output = directoryChooser.showDialog(null);
         if(output != null) {
             pathTextField.setText(output.getPath());
         }
@@ -193,7 +196,7 @@ public class ResizeController implements Initializable {
         this.mImagesSizeSet.add(new ImageSize(36, 36, "ldpi"));
         this.mImagesSizeSet.add(new ImageSize(48, 48, "mdpi"));
         this.mImagesSizeSet.add(new ImageSize(64, 64, "tvdpi"));
-        this.mImagesSizeSet.add(new ImageSize(72, 74, "hdpi"));
+        this.mImagesSizeSet.add(new ImageSize(72, 72, "hdpi"));
         this.mImagesSizeSet.add(new ImageSize(96, 96, "xhdpi"));
         this.mImagesSizeSet.add(new ImageSize(144, 144, "xxhdpi"));
         this.mImagesSizeSet.add(new ImageSize(192, 192, "xxxhdpi"));
