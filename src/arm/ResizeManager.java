@@ -6,10 +6,13 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class ResizeManager {
 
     private volatile static ResizeManager mInstance = null;
+    private static final int coreNum = Runtime.getRuntime().availableProcessors();
 
     public static ResizeManager getInstance() {
         if (mInstance == null) {
@@ -19,18 +22,22 @@ public class ResizeManager {
     }
 
     public void resize(ResizeOrder order, OnProgressListener listener) {
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(coreNum);
         Map<ImageSize, File> outputDirectories = generateOutputDirectories(
                 order.getOutputDirectory(),
                 order.getSizeSet(),
                 order.getImageType());
 
-        float progress = 0;
+        final float[] progress = {0};
         int orderSize = order.getImageList().size();
         for (File image : order.getImageList()) {
-            resizeImage(image, order.getSizeSet(), outputDirectories);
-            progress += 1;
-            listener.onProcessChange(progress / orderSize);
+            executor.execute(() -> {
+                resizeImage(image, order.getSizeSet(), outputDirectories);
+                progress[0] += 1;
+                listener.onProcessChange(progress[0] / orderSize);
+            });
         }
+        executor.shutdown();
     }
 
     private void resizeImage(File image, Set<ImageSize> sizes, Map<ImageSize, File> directories) {
