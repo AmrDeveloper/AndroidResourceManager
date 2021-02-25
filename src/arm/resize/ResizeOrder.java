@@ -1,4 +1,7 @@
-package arm;
+package arm.resize;
+
+import arm.resize.ImageSize;
+import arm.resize.ImageType;
 
 import java.io.File;
 import java.util.List;

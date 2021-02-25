@@ -1,5 +1,6 @@
-package arm;
+package arm.search;
 
+import arm.utils.AlertManager;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

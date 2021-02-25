@@ -1,4 +1,4 @@
-package arm;
+package arm.utils;
 
 import java.util.regex.Pattern;
 

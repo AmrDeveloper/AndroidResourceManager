@@ -1,5 +1,7 @@
-package arm;
+package arm.resize;
 
+import arm.utils.ValidationUtils;
+import arm.utils.AlertManager;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

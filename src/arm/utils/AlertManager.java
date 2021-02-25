@@ -1,4 +1,4 @@
-package arm;
+package arm.utils;
 
 import javafx.scene.control.Alert;
 

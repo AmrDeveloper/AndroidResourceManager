@@ -1,4 +1,4 @@
-package arm;
+package arm.resize;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

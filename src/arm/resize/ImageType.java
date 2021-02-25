@@ -1,4 +1,4 @@
-package arm;
+package arm.resize;
 
 public enum ImageType {
 

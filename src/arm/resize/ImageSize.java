@@ -1,4 +1,4 @@
-package arm;
+package arm.resize;
 
 import java.util.Objects;
 
