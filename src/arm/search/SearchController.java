@@ -72,7 +72,7 @@ public class SearchController implements Initializable, OnSearchListener {
             return;
         }
 
-        mSearchManager.search(path, keyword, this);
+        new Thread(() -> mSearchManager.search(path, keyword, SearchController.this)).start();
     }
 
     private void resultListViewSetup() {

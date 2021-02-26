@@ -1,5 +1,7 @@
 package arm.resize;
 
+import arm.utils.DeviceInfo;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -12,7 +14,6 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class ResizeManager {
 
     private volatile static ResizeManager mInstance = null;
-    private static final int coreNum = Runtime.getRuntime().availableProcessors();
 
     public static ResizeManager getInstance() {
         if (mInstance == null) {
@@ -22,7 +23,7 @@ public class ResizeManager {
     }
 
     public void resize(ResizeOrder order, OnProgressListener listener) {
-        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(coreNum);
+        ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(DeviceInfo.CORE_NUM);
         Map<ImageSize, File> outputDirectories = generateOutputDirectories(
                 order.getOutputDirectory(),
                 order.getSizeSet(),

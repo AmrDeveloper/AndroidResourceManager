@@ -1,5 +1,7 @@
 package arm.search;
 
+import arm.utils.DeviceInfo;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -10,7 +12,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class SearchManager {
 
     private volatile static SearchManager mInstance;
-    private final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(4);
+    private final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(DeviceInfo.CORE_NUM);
 
     public static SearchManager getInstance() {
         if (mInstance == null) {
