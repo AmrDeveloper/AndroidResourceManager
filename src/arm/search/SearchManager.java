@@ -1,18 +1,30 @@
 package arm.search;
 
 import arm.utils.DeviceInfo;
+import arm.utils.FileUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class SearchManager {
 
     private volatile static SearchManager mInstance;
-    private final ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(DeviceInfo.CORE_NUM);
+    private static final Set<String> mSupportedExtensions = new HashSet<>(5);
+    private final ThreadPoolExecutor mExecutorPool = (ThreadPoolExecutor) Executors.newFixedThreadPool(DeviceInfo.CORE_NUM);
+
+    static {
+        mSupportedExtensions.add("java");
+        mSupportedExtensions.add("kt");
+        mSupportedExtensions.add("cpp");
+        mSupportedExtensions.add("xml");
+        mSupportedExtensions.add("txt");
+    }
 
     public static SearchManager getInstance() {
         if (mInstance == null) {
@@ -24,7 +36,7 @@ public class SearchManager {
     public void search(File mainFile, String keyword, OnSearchListener listener) {
         if (mainFile.isDirectory()) {
             searchOnDirectory(mainFile, keyword, listener);
-            executor.shutdown();
+            mExecutorPool.shutdown();
         } else searchOnFile(mainFile, keyword, listener);
     }
 
@@ -33,9 +45,9 @@ public class SearchManager {
         if (files != null) {
             for (File file : files) {
                 if (file.isFile()) {
-                    String name = file.getName();
-                    if(name.endsWith("kt") || name.endsWith("java") || name.endsWith("xml")) {
-                        executor.execute(() -> searchOnFile(file, keyword, listener));
+                    String extensionName = FileUtils.extensionName(file.getName());
+                    if(mSupportedExtensions.contains(extensionName)) {
+                        mExecutorPool.execute(() -> searchOnFile(file, keyword, listener));
                     }
                 }
                 else searchOnDirectory(file, keyword, listener);
