@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arm.search.SearchController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arm.search.SearchController">
     <top>
         <AnchorPane prefHeight="35.0" prefWidth="600.0" BorderPane.alignment="CENTER">
             <Button fx:id="searchButton" layoutX="534.0" layoutY="13.0" mnemonicParsing="false" onAction="#keywordSearching" text="Search" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0" />
@@ -25,6 +25,7 @@
         <AnchorPane prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER">
             <Label layoutX="11.0" layoutY="4.0" text="Matches:" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="4.0" />
             <Label fx:id="matchesCountLabel" layoutX="48.0" layoutY="4.0" text="0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="4.0" />
+         <Label fx:id="searchStateLabel" layoutX="559.0" layoutY="4.0" text="State" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0" />
         </AnchorPane>
     </bottom>
 </BorderPane>

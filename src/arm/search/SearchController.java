@@ -5,15 +5,22 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 
+import java.awt.*;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class SearchController implements Initializable, OnSearchListener {
 
     @FXML private Label matchesCountLabel;
+    @FXML private Label searchStateLabel;
     @FXML private TextField projectPathTextField;
     @FXML private TextField searchKeywordTextField;
 
@@ -23,7 +30,7 @@ public class SearchController implements Initializable, OnSearchListener {
     @FXML private ListView<SearchPosition> searchResultListView;
 
     private int mSearchResultCounter = 0;
-    private static final SearchManager mSearchManager = SearchManager.getInstance();
+    private final TextSearchManager mTextSearchManager = new TextSearchManager(this);
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -72,12 +79,33 @@ public class SearchController implements Initializable, OnSearchListener {
             return;
         }
 
-        new Thread(() -> mSearchManager.search(path, keyword, SearchController.this)).start();
+        searchResultListView.getItems().clear();
+
+        new Thread(() -> mTextSearchManager.search(path, keyword)).start();
     }
 
     private void resultListViewSetup() {
-        searchResultListView.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
+        searchResultListView.setOnMouseClicked(this::onSearchResultSelected);
+        searchResultListView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         searchResultListView.setPlaceholder(new Label("List of your search result :)"));
+    }
+
+    private void onSearchResultSelected(MouseEvent event) {
+        SearchPosition position = searchResultListView.getSelectionModel().getSelectedItem();
+        Desktop desktop = Desktop.getDesktop();
+        try {
+            desktop.open(position.getFile());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onSearchStart() {
+        Platform.runLater(() -> {
+            searchStateLabel.setText("Searching...");
+            matchesCountLabel.setText("0");
+        });
     }
 
     @Override
@@ -87,5 +115,10 @@ public class SearchController implements Initializable, OnSearchListener {
             mSearchResultCounter++;
             matchesCountLabel.setText(String.valueOf(mSearchResultCounter));
         });
+    }
+
+    @Override
+    public void onSearchFinish() {
+        Platform.runLater(() -> searchStateLabel.setText("Done"));
     }
 }
