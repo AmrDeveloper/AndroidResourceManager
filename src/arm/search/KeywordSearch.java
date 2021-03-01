@@ -1,5 +1,8 @@
 package arm.search;
 
+import arm.utils.OnSearchListener;
+import arm.utils.SearchPosition;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -16,7 +19,7 @@ public class KeywordSearch {
                 int startIndex = line.indexOf(keyword);
                 if (startIndex != -1) {
                     int end = startIndex + keyword.length();
-                    SearchPosition position = new SearchPosition(file, lineNumber, startIndex, end);
+                    SearchPosition position = new KeywordPosition(file, lineNumber, startIndex, end);
                     listener.onSearchFound(position);
                 }
                 lineNumber++;

@@ -1,8 +1,8 @@
-package arm.search;
+package arm.utils;
 
 import java.io.File;
 
-public class SearchPosition {
+public abstract class SearchPosition {
 
     private final File file;
     private final int line;
@@ -30,10 +30,5 @@ public class SearchPosition {
 
     public int getEnd() {
         return end;
-    }
-
-    @Override
-    public String toString() {
-        return file.getPath() + " -> " + line + ":" + start + ":" + end;
     }
 }

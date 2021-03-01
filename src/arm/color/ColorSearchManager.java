@@ -1,4 +1,4 @@
-package arm.search;
+package arm.color;
 
 import arm.utils.DeviceInfo;
 import arm.utils.FileCrawler;
@@ -6,34 +6,23 @@ import arm.utils.FileUtils;
 import arm.utils.OnSearchListener;
 
 import java.io.File;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-public class TextSearchManager extends FileCrawler {
+public class ColorSearchManager extends FileCrawler {
 
     private final OnSearchListener mSearchListener;
-    private static final Set<String> mSupportedExtensions = new HashSet<>(5);
 
-    static {
-        mSupportedExtensions.add("java");
-        mSupportedExtensions.add("kt");
-        mSupportedExtensions.add("cpp");
-        mSupportedExtensions.add("xml");
-        mSupportedExtensions.add("txt");
-    }
-
-    public TextSearchManager(OnSearchListener listener) {
+    public ColorSearchManager(OnSearchListener listener) {
         mSearchListener = listener;
     }
 
-    public void search(File mainFile, String keyword) {
+    public void search(File mainFile) {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(DeviceInfo.CORE_NUM);
         startFileSearching(mainFile, file -> {
             String extensionName = FileUtils.extensionName(file.getName());
-            if(mSupportedExtensions.contains(extensionName)) {
-                executor.execute(() -> KeywordSearch.searchOnFile(file, keyword, mSearchListener));
+            if(extensionName.equals("xml")) {
+                executor.execute(() -> ColorSearch.searchOnFile(file, mSearchListener));
             }
         });
         executor.shutdown();

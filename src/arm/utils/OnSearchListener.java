@@ -1,4 +1,4 @@
-package arm.search;
+package arm.utils;
 
 public interface OnSearchListener {
     void onSearchStart();

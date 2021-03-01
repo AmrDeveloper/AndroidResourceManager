@@ -13,4 +13,9 @@
    <ImageView fx:id="searchImageView" fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="15.0" onMouseClicked="#openSearchView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="45.0">
       <Image url="@../../resources/icon_search_48.png" />
    </ImageView>
+   <ImageView fx:id="colorImageView" fitHeight="25.0" fitWidth="25.0" layoutX="2.0" layoutY="70.0" onMouseClicked="#openColorSearchView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="80.0">
+      <image>
+         <Image url="@../../resources/icon_color_48.png" />
+      </image>
+   </ImageView>
 </AnchorPane>

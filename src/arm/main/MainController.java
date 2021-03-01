@@ -15,6 +15,7 @@ public class MainController implements Initializable {
 
     @FXML private ImageView resizeImageView;
     @FXML private ImageView searchImageView;
+    @FXML private ImageView colorImageView;
     @FXML private BorderPane viewBorderPane;
 
     private static ServiceName mServiceName = ServiceName.RESIZING;
@@ -36,6 +37,14 @@ public class MainController implements Initializable {
     private void openSearchView() {
         if(mServiceName != ServiceName.SEARCHING) {
             loadViewIntoBorderPane("/arm/search/search_view", viewBorderPane);
+            mServiceName = ServiceName.SEARCHING;
+        }
+    }
+
+    @FXML
+    private void openColorSearchView() {
+        if(mServiceName != ServiceName.SEARCHING) {
+            loadViewIntoBorderPane("/arm/color/color_view", viewBorderPane);
             mServiceName = ServiceName.SEARCHING;
         }
     }

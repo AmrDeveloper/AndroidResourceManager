@@ -1,6 +1,8 @@
 package arm.search;
 
 import arm.utils.AlertManager;
+import arm.utils.OnSearchListener;
+import arm.utils.SearchPosition;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -27,7 +29,7 @@ public class SearchController implements Initializable, OnSearchListener {
     @FXML private Button findPathButton;
     @FXML private Button searchButton;
 
-    @FXML private ListView<SearchPosition> searchResultListView;
+    @FXML private ListView<KeywordPosition> searchResultListView;
 
     private int mSearchResultCounter = 0;
     private final TextSearchManager mTextSearchManager = new TextSearchManager(this);
@@ -40,6 +42,8 @@ public class SearchController implements Initializable, OnSearchListener {
 
     private void setViewsTooltip() {
         matchesCountLabel.setTooltip(new Tooltip("Number of matches search"));
+        searchStateLabel.setTooltip(new Tooltip("Search State Label"));
+
         projectPathTextField.setTooltip(new Tooltip("Project Path to search in it"));
         searchKeywordTextField.setTooltip(new Tooltip("Search keyword to search with it"));
 
@@ -92,11 +96,13 @@ public class SearchController implements Initializable, OnSearchListener {
 
     private void onSearchResultSelected(MouseEvent event) {
         SearchPosition position = searchResultListView.getSelectionModel().getSelectedItem();
-        Desktop desktop = Desktop.getDesktop();
-        try {
-            desktop.open(position.getFile());
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (position != null) {
+            Desktop desktop = Desktop.getDesktop();
+            try {
+                desktop.open(position.getFile());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -111,7 +117,7 @@ public class SearchController implements Initializable, OnSearchListener {
     @Override
     public void onSearchFound(SearchPosition position) {
         Platform.runLater(() -> {
-            searchResultListView.getItems().add(position);
+            searchResultListView.getItems().add((KeywordPosition) position);
             mSearchResultCounter++;
             matchesCountLabel.setText(String.valueOf(mSearchResultCounter));
         });
