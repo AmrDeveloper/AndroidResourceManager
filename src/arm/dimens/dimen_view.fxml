@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arm.dimens.DimensionController">
+    <top>
+        <AnchorPane prefHeight="35.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TextField fx:id="layoutsPathTextField" layoutX="14.0" layoutY="9.0" promptText="Layout directory path" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="105.0" AnchorPane.topAnchor="4.0" />
+            <Button fx:id="dimensionSearchButton" layoutX="534.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#startColorAnalysis" text="Search" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0" />
+            <Button fx:id="layoutPathButton" layoutX="490.0" layoutY="7.0" mnemonicParsing="false" onMouseClicked="#findProjectPath" text="Find" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="60.0" AnchorPane.topAnchor="4.0" />
+        </AnchorPane>
+    </top>
+    <bottom>
+        <AnchorPane prefHeight="25.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <Label layoutX="10.0" layoutY="4.0" text="Matches:" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="4.0" />
+            <Label fx:id="matchesCountLabel" layoutX="53.0" layoutY="4.0" text="0" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="60.0" AnchorPane.topAnchor="4.0" />
+            <Label fx:id="searchStateLabel" layoutX="561.0" layoutY="-4.0" text="State" AnchorPane.bottomAnchor="4.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="4.0" />
+            <Label fx:id="colorValueLabel" alignment="CENTER" layoutX="286.0" layoutY="4.0" text="Dimensions Value" textAlignment="CENTER" AnchorPane.bottomAnchor="4.0" AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="4.0" />
+        </AnchorPane>
+    </bottom>
+    <center>
+        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <ListView fx:id="dimensionListView" layoutX="194.0" layoutY="70.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+        </AnchorPane>
+    </center>
+</BorderPane>

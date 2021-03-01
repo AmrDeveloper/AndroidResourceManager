@@ -16,6 +16,7 @@ public class MainController implements Initializable {
     @FXML private ImageView resizeImageView;
     @FXML private ImageView searchImageView;
     @FXML private ImageView colorImageView;
+    @FXML private ImageView dimensionImageView;
     @FXML private BorderPane viewBorderPane;
 
     private static ServiceName mServiceName = ServiceName.RESIZING;
@@ -46,6 +47,14 @@ public class MainController implements Initializable {
         if(mServiceName != ServiceName.COLOR_ANALYSIS) {
             loadViewIntoBorderPane("/arm/color/color_view", viewBorderPane);
             mServiceName = ServiceName.COLOR_ANALYSIS;
+        }
+    }
+
+    @FXML
+    private void openDimensionSearchView() {
+        if(mServiceName != ServiceName.DIMENS_ANALYSIS) {
+            loadViewIntoBorderPane("/arm/dimens/dimen_view", viewBorderPane);
+            mServiceName = ServiceName.DIMENS_ANALYSIS;
         }
     }
 
