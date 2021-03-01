@@ -2,5 +2,6 @@ package arm.main;
 
 public enum ServiceName {
     RESIZING,
-    SEARCHING
+    SEARCHING,
+    COLOR_ANALYSIS
 }

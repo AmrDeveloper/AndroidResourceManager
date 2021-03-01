@@ -43,9 +43,9 @@ public class MainController implements Initializable {
 
     @FXML
     private void openColorSearchView() {
-        if(mServiceName != ServiceName.SEARCHING) {
+        if(mServiceName != ServiceName.COLOR_ANALYSIS) {
             loadViewIntoBorderPane("/arm/color/color_view", viewBorderPane);
-            mServiceName = ServiceName.SEARCHING;
+            mServiceName = ServiceName.COLOR_ANALYSIS;
         }
     }
 
