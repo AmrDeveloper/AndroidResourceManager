@@ -61,9 +61,9 @@ public class MainController implements Initializable {
 
     @FXML
     private void openAnalysisSearchView() {
-        if(mServiceName != ServiceName.DIMENS_ANALYSIS) {
+        if(mServiceName != ServiceName.SOURCE_ANALYSIS) {
             loadViewIntoBorderPane("/arm/analysis/analysis_view", viewBorderPane);
-            mServiceName = ServiceName.DIMENS_ANALYSIS;
+            mServiceName = ServiceName.SOURCE_ANALYSIS;
         }
     }
 
