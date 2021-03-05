@@ -21,7 +21,7 @@ public class ColorSearchManager extends FileCrawler {
         ThreadPoolExecutor executor = (ThreadPoolExecutor) Executors.newFixedThreadPool(DeviceInfo.CORE_NUM);
         startFileSearching(mainFile, file -> {
             String extensionName = FileUtils.extensionName(file.getName());
-            if(extensionName.equals("xml")) {
+            if(extensionName.equals("xml") && file.getParent().endsWith("res\\layout")) {
                 executor.execute(() -> ColorSearch.searchOnFile(file, mSearchListener));
             }
         });
