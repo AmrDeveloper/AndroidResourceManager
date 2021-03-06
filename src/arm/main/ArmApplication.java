@@ -14,7 +14,8 @@ public class ArmApplication extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("main_view.fxml"));
         primaryStage.setTitle("Android Resource Manager - ARM");
         Scene mainScene = new Scene(root, 650, 400);
-        primaryStage.getIcons().add(new Image("resources/arm_logo.png"));
+        mainScene.getStylesheets().add("resources/style/main_style.css");
+        primaryStage.getIcons().add(new Image("resources/icon/arm_logo.png"));
         primaryStage.setScene(mainScene);
         primaryStage.show();
     }

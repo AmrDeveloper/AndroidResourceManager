@@ -8,20 +8,20 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arm.main.MainController">
    <BorderPane fx:id="viewBorderPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
    <ImageView fx:id="resizeImageView" fitHeight="25.0" fitWidth="25.0" layoutX="-78.0" layoutY="14.0" onMouseClicked="#openResizeView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
-      <Image url="@../../resources/icon_resize_48.png" />
+      <Image url="@../../resources/icon/icon_resize_48.png" />
    </ImageView>
    <ImageView fx:id="searchImageView" fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="15.0" onMouseClicked="#openSearchView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="45.0">
-      <Image url="@../../resources/icon_search_48.png" />
+      <Image url="@../../resources/icon/icon_search_48.png" />
    </ImageView>
    <ImageView fx:id="colorImageView" fitHeight="25.0" fitWidth="25.0" layoutX="2.0" layoutY="70.0" onMouseClicked="#openColorSearchView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="80.0">
-      <Image url="@../../resources/icon_color_48.png" />
+      <Image url="@../../resources/icon/icon_color_48.png" />
    </ImageView>
    <ImageView fx:id="dimensionImageView" fitHeight="25.0" fitWidth="25.0" layoutX="-82.0" layoutY="45.0" onMouseClicked="#openDimensionSearchView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="115.0">
-      <Image url="@../../resources/icon_dimens_48.png" />
+      <Image url="@../../resources/icon/icon_dimens_48.png" />
    </ImageView>
    <ImageView fx:id="analysisImageView" fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="125.0" onMouseClicked="#openAnalysisSearchView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
       <image>
-         <Image url="@../../resources/icon_analysis_48.png" />
+         <Image url="@../../resources/icon/icon_analysis_48.png" />
       </image>
    </ImageView>
 </AnchorPane>
