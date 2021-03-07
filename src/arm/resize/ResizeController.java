@@ -116,6 +116,8 @@ public class ResizeController implements Initializable, OnProgressListener {
             return;
         }
 
+        if (mImagesSizeSet.isEmpty()) return;
+
         ImageType imageType = imageTypeComboBox.getSelectionModel().getSelectedItem();
         ResizeOrder resizeOrder = new ResizeOrder(mImagesFilesList, mImagesSizeSet, imageType, outputPathFile);
         new Thread(() -> mResizeManager.resize(resizeOrder, ResizeController.this)).start();
