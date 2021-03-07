@@ -2,6 +2,7 @@
 
 [![Download AndroidResourceManager](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/androidresourcemanager/files/latest/download)
 [![Download AndroidResourceManager](https://sourceforge.net/sflogo.php?type=14&group_id=3339638)](https://sourceforge.net/p/androidresourcemanager/)
+[![Min JDK Version](https://img.shields.io/badge/Required%20JDK-%2B8-brightgreen)](https://jdk.java.net/java-se-ri/8-MR3)
 [![Download AndroidResourceManager](https://img.shields.io/sourceforge/dt/androidresourcemanager.svg)](https://sourceforge.net/projects/androidresourcemanager/files/latest/download)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -35,3 +36,7 @@ Once you select your project directory and click on search, ARM will search for 
 Once you select your project directory and click analysis, the ARM will be analysing your source code files and show you the number of Java, Kotlin and XML files.
 
 ![Source Code Analysis Service](screenshots/code_analysis_service.jpg)
+
+Feel free to suggest, submit an issue or create a pull request
+
+Youtube Video: [AndroidResourceManager 1.0.0](https://www.youtube.com/watch?v=sEdpBIALJIg&feature=youtu.be&ab_channel=AmrDeveloper)
