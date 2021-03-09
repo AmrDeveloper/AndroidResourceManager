@@ -51,7 +51,7 @@ public class ImageSize {
 
     @Override
     public String toString() {
-        return height + "x" + width + " pixels (" + hint + ")";
+        return height + "x" + width + " pixels " + hint;
     }
 
 }
