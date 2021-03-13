@@ -102,10 +102,10 @@ public class ResizeController implements Initializable, OnProgressListener {
         if(outputPath.isEmpty()) return;
 
         File outputPathFile = new File(outputPath);
-        if(!outputPathFile.exists()) {
+        if(!outputPathFile.exists() && !outputPathFile.canWrite()) {
             AlertManager.showErrorDialog("Resize Action",
                     "Output Path",
-                    "Output Path not exists.");
+                    "Output Path not exists or can't write.");
             return;
         }
 
