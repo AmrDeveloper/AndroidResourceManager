@@ -1,6 +1,7 @@
 package arm.resize;
 
 import arm.utils.DeviceInfo;
+import arm.utils.FileUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -47,8 +48,9 @@ public class ResizeManager {
                 BufferedImage originalImage = ImageIO.read(image);
                 BufferedImage resizedImage = imageBufferedResize(originalImage, size);
                 File outputDirectory = directories.get(size);
-                String imagePath = outputDirectory + File.separator + imageNameParser(image.getName()) + ".jpg";
-                ImageIO.write(resizedImage, "jpg", new File(imagePath));
+                String extension = FileUtils.extensionName(image.getName());
+                String imagePath = outputDirectory + File.separator + imageNameParser(image.getName()) + "." + extension;
+                ImageIO.write(resizedImage, extension, new File(imagePath));
             } catch (IOException e) {
                 System.err.println("Can't create this directory : " + e.getMessage());
             }
