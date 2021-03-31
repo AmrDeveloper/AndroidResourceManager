@@ -84,7 +84,7 @@ public class ResizeController implements Initializable, OnProgressListener {
             List<File> files = event.getDragboard().getFiles();
             boolean isValidFileType = true;
             for(File file : files) {
-                if(!file.isFile() || !FileUtils.isImageExtension(file.getName())) isValidFileType = false;
+                if(file.isFile() && !FileUtils.isImageExtension(file.getName())) isValidFileType = false;
             }
             if(isValidFileType) event.acceptTransferModes(TransferMode.ANY);
         }
@@ -95,11 +95,25 @@ public class ResizeController implements Initializable, OnProgressListener {
     private void onImageDragDropped(DragEvent event) {
         List<File> currentDropped = event.getDragboard().getFiles();
         for(File imageFile : currentDropped) {
-            this.mImagesFilesList.add(imageFile);
-            this.imagesListView.getItems().add(imageFile);
+            if(imageFile.isFile()) {
+                this.mImagesFilesList.add(imageFile);
+                this.imagesListView.getItems().add(imageFile);
+            } else {
+                crawlImagesFromDirectory(imageFile);
+            }
         }
         event.setDropCompleted(true);
         event.consume();
+    }
+
+    private void crawlImagesFromDirectory(File directory) {
+        for(File file : Objects.requireNonNull(directory.listFiles())) {
+            if(file.isDirectory()) crawlImagesFromDirectory(file);
+            else if(file.isFile() && FileUtils.isImageExtension(file.getName())) {
+                this.mImagesFilesList.add(file);
+                this.imagesListView.getItems().add(file);
+            }
+        }
     }
 
     @FXML
