@@ -8,7 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -29,6 +31,8 @@ public class AnalysisController implements Initializable, OnAnalysisListener {
     @FXML private TextField projectPathTextField;
     @FXML private Button findPathButton;
     @FXML private Button analysisButton;
+
+    @FXML private BorderPane analysisViewLayout;
 
     private int javaLinesCount = 0;
     private int kotlinLinesCount = 0;
@@ -98,7 +102,8 @@ public class AnalysisController implements Initializable, OnAnalysisListener {
     private void findProjectPath() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Output Directory Path");
-        File output = directoryChooser.showDialog(null);
+        Stage currentStage = (Stage) analysisViewLayout.getScene().getWindow();
+        File output = directoryChooser.showDialog(currentStage);
         if(output != null) {
             projectPathTextField.setText(output.getPath());
         }

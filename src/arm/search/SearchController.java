@@ -11,7 +11,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 import java.awt.*;
 import java.io.File;
@@ -30,6 +32,8 @@ public class SearchController implements Initializable, OnSearchListener {
     @FXML private Button searchButton;
 
     @FXML private ListView<KeywordPosition> searchResultListView;
+
+    @FXML private BorderPane searchViewLayout;
 
     private int mSearchResultCounter = 0;
     private final TextSearchManager mTextSearchManager = new TextSearchManager(this);
@@ -57,7 +61,8 @@ public class SearchController implements Initializable, OnSearchListener {
     private void findProjectPath() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Output Directory Path");
-        File output = directoryChooser.showDialog(null);
+        Stage currentStage = (Stage) searchViewLayout.getScene().getWindow();
+        File output = directoryChooser.showDialog(currentStage);
         if(output != null) {
             projectPathTextField.setText(output.getPath());
         }

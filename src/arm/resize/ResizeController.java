@@ -13,7 +13,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -44,6 +46,7 @@ public class ResizeController implements Initializable, OnProgressListener {
     @FXML private Button clearAllImagesAction;
     @FXML private Button resizeButton;
     @FXML private ListView<File> imagesListView;
+    @FXML private BorderPane resizeViewLayout;
 
     private final List<File> mImagesFilesList = new ArrayList<>();
     private final Set<ImageSize> mImagesSizeSet = new HashSet<>();
@@ -152,7 +155,8 @@ public class ResizeController implements Initializable, OnProgressListener {
     private void findOutputDirectoryPath() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Output Directory Path");
-        File output = directoryChooser.showDialog(null);
+        Stage currentStage = (Stage) resizeViewLayout.getScene().getWindow();
+        File output = directoryChooser.showDialog(currentStage);
         if(output != null) {
             pathTextField.setText(output.getPath());
         }

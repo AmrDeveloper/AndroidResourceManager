@@ -9,7 +9,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
@@ -26,6 +28,7 @@ public class DimensionController implements Initializable, OnSearchListener {
     @FXML private Button dimensionSearchButton;
 
     @FXML private ListView<DimensionPosition> dimensionListView;
+    @FXML private BorderPane dimensViewLayout;
 
     private int mSearchResultCounter = 0;
     private final DimensionSearchManager mDimensionSearchManager = new DimensionSearchManager(this);
@@ -64,7 +67,8 @@ public class DimensionController implements Initializable, OnSearchListener {
     private void findProjectPath() {
         DirectoryChooser directoryChooser = new DirectoryChooser();
         directoryChooser.setTitle("Output Directory Path");
-        File output = directoryChooser.showDialog(null);
+        Stage currentStage = (Stage) dimensViewLayout.getScene().getWindow();
+        File output = directoryChooser.showDialog(currentStage);
         if(output != null) {
             layoutsPathTextField.setText(output.getPath());
         }
