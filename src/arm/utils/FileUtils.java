@@ -11,4 +11,9 @@ public class FileUtils {
         return extension;
     }
 
+    public static boolean isImageExtension(String fileName) {
+        String extension = extensionName(fileName);
+        return (extension.equalsIgnoreCase("png")
+                || extension.equalsIgnoreCase("jpeg"));
+    }
 }

@@ -19,9 +19,9 @@
    <ImageView fx:id="dimensionImageView" fitHeight="25.0" fitWidth="25.0" layoutX="-82.0" layoutY="45.0" onMouseClicked="#openDimensionSearchView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="115.0">
       <Image url="@../../resources/icon/icon_dimens_48.png" />
    </ImageView>
-   <ImageView fx:id="analysisImageView" fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="125.0" onMouseClicked="#openAnalysisSearchView" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
-      <image>
-         <Image url="@../../resources/icon/icon_analysis_48.png" />
-      </image>
+   <ImageView fx:id="analysisImageView" fitHeight="25.0" fitWidth="25.0" layoutX="15.0" layoutY="125.0"
+              onMouseClicked="#openAnalysisSearchView" pickOnBounds="true" preserveRatio="true"
+              AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="150.0">
+      <Image url="@../../resources/icon/icon_analysis_48.png"/>
    </ImageView>
 </AnchorPane>

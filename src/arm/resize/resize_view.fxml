@@ -12,28 +12,45 @@
 <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="arm.resize.ResizeController">
    <right>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-         <children>
-            <ImageView fx:id="previewImageView" fitHeight="100.0" fitWidth="170.0" layoutX="15.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="20.0" />
-            <Button fx:id="resizeButton" layoutX="75.0" layoutY="361.0" mnemonicParsing="false" onAction="#resizeButtonAction" text="Resize" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" AnchorPane.topAnchor="360.0" />
-            <ProgressBar fx:id="stateProgressBar" layoutX="15.0" layoutY="316.0" prefHeight="18.0" prefWidth="150.0" progress="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-            <ComboBox fx:id="imageTypeComboBox" layoutX="15.0" layoutY="279.0" prefWidth="150.0" promptText="Image Type" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" />
-            <ListView fx:id="imageSizesListView" layoutY="132.0" prefHeight="75.0" prefWidth="170.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" />
-            <TextField fx:id="heightTextField" layoutX="10.0" layoutY="208.0" prefWidth="50.0" promptText="Height " AnchorPane.leftAnchor="10.0" />
-            <TextField fx:id="widthTextField" layoutX="59.0" layoutY="208.0" prefWidth="50.0" promptText="Width" AnchorPane.leftAnchor="59.0" />
-            <Button fx:id="addSizeButton" layoutX="109.0" layoutY="208.0" mnemonicParsing="false" onAction="#addImageSize" text="Add" />
-            <Button fx:id="clearSizeButton" layoutX="147.0" layoutY="208.0" mnemonicParsing="false" onAction="#clearSelectedImageSize" text="Clear" AnchorPane.rightAnchor="10.0" />
-         </children>
+         <ImageView fx:id="previewImageView" fitHeight="100.0" fitWidth="170.0" layoutX="15.0" layoutY="20.0"
+                    pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0"
+                    AnchorPane.topAnchor="20.0"/>
+         <Button fx:id="resizeButton" layoutX="75.0" layoutY="361.0" mnemonicParsing="false"
+                 onAction="#resizeButtonAction" text="Resize" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0"
+                 AnchorPane.topAnchor="360.0"/>
+         <ProgressBar fx:id="stateProgressBar" layoutX="15.0" layoutY="316.0" prefHeight="18.0" prefWidth="150.0"
+                      progress="0.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0"/>
+         <ComboBox fx:id="imageTypeComboBox" layoutX="15.0" layoutY="279.0" prefWidth="150.0" promptText="Image Type"
+                   AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0"/>
+         <ListView fx:id="imageSizesListView" layoutY="132.0" prefHeight="75.0" prefWidth="170.0"
+                   AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0"/>
+         <TextField fx:id="heightTextField" layoutX="10.0" layoutY="208.0" prefWidth="50.0" promptText="Height "
+                    AnchorPane.leftAnchor="10.0"/>
+         <TextField fx:id="widthTextField" layoutX="59.0" layoutY="208.0" prefWidth="50.0" promptText="Width"
+                    AnchorPane.leftAnchor="59.0"/>
+         <Button fx:id="addSizeButton" layoutX="109.0" layoutY="208.0" mnemonicParsing="false" onAction="#addImageSize"
+                 text="Add"/>
+         <Button fx:id="clearSizeButton" layoutX="147.0" layoutY="208.0" mnemonicParsing="false"
+                 onAction="#clearSelectedImageSize" text="Clear" AnchorPane.rightAnchor="10.0"/>
       </AnchorPane>
    </right>
    <center>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
-         <children>
-            <ListView fx:id="imagesListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDropped="#onImageDragDropped" onDragOver="#onImageDragging" AnchorPane.bottomAnchor="100.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
-            <Button fx:id="outputPathButton" layoutX="10.0" layoutY="307.0" mnemonicParsing="false" onAction="#findOutputDirectoryPath" text="Find" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="10.0" />
-            <TextField fx:id="pathTextField" alignment="TOP_LEFT" layoutX="56.0" layoutY="307.0" prefHeight="25.0" prefWidth="220.0" promptText="Output Path" AnchorPane.bottomAnchor="68.0" AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="135.0" />
-            <Button fx:id="clearSelectedImageButton" layoutX="271.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#onImagesListClearSelectedItems" prefHeight="25.0" prefWidth="50.0" text="Clear" AnchorPane.bottomAnchor="68.0" AnchorPane.rightAnchor="80.0" />
-            <Button fx:id="clearAllImagesAction" layoutX="330.0" layoutY="307.0" mnemonicParsing="false" onMouseClicked="#onImagesListClearAllItems" text="Clear All" AnchorPane.bottomAnchor="68.0" AnchorPane.rightAnchor="10.0" />
-         </children>
+         <ListView fx:id="imagesListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
+                   onDragDropped="#onImageDragDropped" onDragOver="#onImageDragging" AnchorPane.bottomAnchor="100.0"
+                   AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0"/>
+         <Button fx:id="outputPathButton" layoutX="10.0" layoutY="307.0" mnemonicParsing="false"
+                 onAction="#findOutputDirectoryPath" text="Find" AnchorPane.bottomAnchor="68.0"
+                 AnchorPane.leftAnchor="10.0"/>
+         <TextField fx:id="pathTextField" alignment="TOP_LEFT" layoutX="56.0" layoutY="307.0" prefHeight="25.0"
+                    prefWidth="220.0" promptText="Output Path" AnchorPane.bottomAnchor="68.0"
+                    AnchorPane.leftAnchor="55.0" AnchorPane.rightAnchor="135.0"/>
+         <Button fx:id="clearSelectedImageButton" layoutX="271.0" layoutY="307.0" mnemonicParsing="false"
+                 onMouseClicked="#onImagesListClearSelectedItems" prefHeight="25.0" prefWidth="50.0" text="Clear"
+                 AnchorPane.bottomAnchor="68.0" AnchorPane.rightAnchor="80.0"/>
+         <Button fx:id="clearAllImagesAction" layoutX="330.0" layoutY="307.0" mnemonicParsing="false"
+                 onMouseClicked="#onImagesListClearAllItems" text="Clear All" AnchorPane.bottomAnchor="68.0"
+                 AnchorPane.rightAnchor="10.0"/>
       </AnchorPane>
    </center>
 </BorderPane>

@@ -1,5 +1,6 @@
 package arm.resize;
 
+import arm.utils.FileUtils;
 import arm.utils.ValidationUtils;
 import arm.utils.AlertManager;
 import javafx.application.Platform;
@@ -80,7 +81,12 @@ public class ResizeController implements Initializable, OnProgressListener {
     @FXML
     private void onImageDragging(DragEvent event) {
         if (event.getDragboard().hasFiles()) {
-            event.acceptTransferModes(TransferMode.ANY);
+            List<File> files = event.getDragboard().getFiles();
+            boolean isValidFileType = true;
+            for(File file : files) {
+                if(!file.isFile() || !FileUtils.isImageExtension(file.getName())) isValidFileType = false;
+            }
+            if(isValidFileType) event.acceptTransferModes(TransferMode.ANY);
         }
         event.consume();
     }
