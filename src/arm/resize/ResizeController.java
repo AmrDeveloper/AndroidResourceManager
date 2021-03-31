@@ -122,7 +122,12 @@ public class ResizeController implements Initializable, OnProgressListener {
             return;
         }
 
-        if (mImagesSizeSet.isEmpty()) return;
+        if (mImagesSizeSet.isEmpty()) {
+            AlertManager.showErrorDialog("Resize Action",
+                    "Number of sizes",
+                    "You must have at last one size.");
+            return;
+        }
 
         ImageType imageType = imageTypeComboBox.getSelectionModel().getSelectedItem();
         ResizeOrder resizeOrder = new ResizeOrder(mImagesFilesList, mImagesSizeSet, imageType, outputPathFile);
