@@ -1,6 +1,5 @@
 package arm.dimens;
 
-import arm.color.ColorPosition;
 import arm.utils.AlertManager;
 import arm.utils.OnSearchListener;
 import arm.utils.SearchPosition;

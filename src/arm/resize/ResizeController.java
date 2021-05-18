@@ -25,6 +25,8 @@ public class ResizeController implements Initializable, OnProgressListener {
 
     // Preview Views
     @FXML private ImageView previewImageView;
+    @FXML private Label previewImageSize;
+    @FXML private Label previewImageDimensions;
 
     // Options
     @FXML private ComboBox<ImageType> imageTypeComboBox;
@@ -52,13 +54,14 @@ public class ResizeController implements Initializable, OnProgressListener {
     private final Set<ImageSize> mImagesSizeSet = new HashSet<>();
 
     private final ResizeManager mResizeManager = ResizeManager.getInstance();
+    private final static Image mDefaultPreviewImage = new Image("resources/icon/preview_128.png");
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         imageListViewSetup();
         sizeListViewSetup();
         setViewsTooltip();
-
+        setPreviewImageDefaultValues();
         imageTypeComboBox.getItems().addAll(ImageType.values());
         imageTypeComboBox.getSelectionModel().select(0);
     }
@@ -79,6 +82,12 @@ public class ResizeController implements Initializable, OnProgressListener {
         clearAllImagesAction.setTooltip(new Tooltip("Clear All Images"));
         resizeButton.setTooltip(new Tooltip("Start Resizing"));
         imagesListView.setTooltip(new Tooltip("Image List"));
+    }
+
+    private void setPreviewImageDefaultValues() {
+        previewImageView.setImage(mDefaultPreviewImage);
+        previewImageSize.setText("0");
+        previewImageDimensions.setText("0x0");
     }
 
     @FXML
@@ -170,12 +179,17 @@ public class ResizeController implements Initializable, OnProgressListener {
             this.imagesListView.getItems().remove(currentIndex);
             mImagesFilesList.remove(currentIndex);
         }
+
+        if(imagesListView.getItems().size() == 0) {
+            setPreviewImageDefaultValues();
+        }
     }
 
     @FXML
     private void onImagesListClearAllItems() {
         mImagesFilesList.clear();
         this.imagesListView.getItems().clear();
+        setPreviewImageDefaultValues();
     }
 
     @FXML
@@ -241,6 +255,8 @@ public class ResizeController implements Initializable, OnProgressListener {
         ObservableList<File> selectedItems = imagesListView.getSelectionModel().getSelectedItems();
         selectedItems.forEach(file -> {
             Image image = new Image(file.toURI().toString());
+            previewImageSize.setText(FileUtils.getFormattedFileSize(file));
+            previewImageDimensions.setText(image.getHeight() + "x" + image.getWidth());
             previewImageView.setImage(image);
         });
     }
