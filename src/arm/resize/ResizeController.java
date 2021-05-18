@@ -50,7 +50,7 @@ public class ResizeController implements Initializable, OnProgressListener {
     @FXML private ListView<File> imagesListView;
     @FXML private BorderPane resizeViewLayout;
 
-    private final List<File> mImagesFilesList = new ArrayList<>();
+    private final Set<File> mImagesFilesSet = new HashSet<>();
     private final Set<ImageSize> mImagesSizeSet = new HashSet<>();
 
     private final ResizeManager mResizeManager = ResizeManager.getInstance();
@@ -108,8 +108,9 @@ public class ResizeController implements Initializable, OnProgressListener {
         List<File> currentDropped = event.getDragboard().getFiles();
         for(File imageFile : currentDropped) {
             if(imageFile.isFile()) {
-                this.mImagesFilesList.add(imageFile);
-                this.imagesListView.getItems().add(imageFile);
+                if(mImagesFilesSet.add(imageFile)) {
+                    imagesListView.getItems().add(imageFile);
+                }
             } else {
                 crawlImagesFromDirectory(imageFile);
             }
@@ -122,7 +123,7 @@ public class ResizeController implements Initializable, OnProgressListener {
         for(File file : Objects.requireNonNull(directory.listFiles())) {
             if(file.isDirectory()) crawlImagesFromDirectory(file);
             else if(file.isFile() && FileUtils.isImageExtension(file.getName())) {
-                this.mImagesFilesList.add(file);
+                this.mImagesFilesSet.add(file);
                 this.imagesListView.getItems().add(file);
             }
         }
@@ -131,7 +132,12 @@ public class ResizeController implements Initializable, OnProgressListener {
     @FXML
     private void resizeButtonAction() {
         String outputPath = pathTextField.getText();
-        if(outputPath.isEmpty()) return;
+        if(outputPath.isEmpty()) {
+            AlertManager.showErrorDialog("Resize Action",
+                    "Output Path",
+                    "Output Path Can't be empty.");
+            return;
+        }
 
         File outputPathFile = new File(outputPath);
         if(!outputPathFile.exists() && !outputPathFile.canWrite()) {
@@ -156,7 +162,7 @@ public class ResizeController implements Initializable, OnProgressListener {
         }
 
         ImageType imageType = imageTypeComboBox.getSelectionModel().getSelectedItem();
-        ResizeOrder resizeOrder = new ResizeOrder(mImagesFilesList, mImagesSizeSet, imageType, outputPathFile);
+        ResizeOrder resizeOrder = new ResizeOrder(mImagesFilesSet, mImagesSizeSet, imageType, outputPathFile);
         new Thread(() -> mResizeManager.resize(resizeOrder, ResizeController.this)).start();
     }
 
@@ -176,8 +182,8 @@ public class ResizeController implements Initializable, OnProgressListener {
         List<Integer> selectedImagesIndex = imagesListView.getSelectionModel().getSelectedIndices();
         for (int i = selectedImagesIndex.size() - 1; i > -1; i--) {
             int currentIndex = selectedImagesIndex.get(i);
-            this.imagesListView.getItems().remove(currentIndex);
-            mImagesFilesList.remove(currentIndex);
+            File removedImage = imagesListView.getItems().remove(currentIndex);
+            mImagesFilesSet.remove(removedImage);
         }
 
         if(imagesListView.getItems().size() == 0) {
@@ -187,7 +193,7 @@ public class ResizeController implements Initializable, OnProgressListener {
 
     @FXML
     private void onImagesListClearAllItems() {
-        mImagesFilesList.clear();
+        mImagesFilesSet.clear();
         this.imagesListView.getItems().clear();
         setPreviewImageDefaultValues();
     }

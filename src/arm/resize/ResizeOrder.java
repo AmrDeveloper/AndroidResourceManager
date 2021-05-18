@@ -1,20 +1,16 @@
 package arm.resize;
 
-import arm.resize.ImageSize;
-import arm.resize.ImageType;
-
 import java.io.File;
-import java.util.List;
 import java.util.Set;
 
 public class ResizeOrder {
 
-    private final List<File> imageList;
+    private final Set<File> imageList;
     private final Set<ImageSize> sizeSet;
     private final ImageType imageType;
     private final File outputDirectory;
 
-    public ResizeOrder(List<File> images,
+    public ResizeOrder(Set<File> images,
                        Set<ImageSize> sizes,
                        ImageType imageType,
                        File outputDirectory) {
@@ -24,7 +20,7 @@ public class ResizeOrder {
         this.outputDirectory = outputDirectory;
     }
 
-    public List<File> getImageList() {
+    public Set<File> getImageList() {
         return imageList;
     }
 
