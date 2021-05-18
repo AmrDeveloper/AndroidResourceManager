@@ -2,7 +2,7 @@
 
 [![Download AndroidResourceManager](https://a.fsdn.com/con/app/sf-download-button)](https://sourceforge.net/projects/androidresourcemanager/files/latest/download)
 [![Download AndroidResourceManager](https://sourceforge.net/sflogo.php?type=14&group_id=3339638)](https://sourceforge.net/p/androidresourcemanager/)
-[![Version](https://img.shields.io/badge/Version-1.0.1-orange)](https://sourceforge.net/p/androidresourcemanager/)
+[![Version](https://img.shields.io/badge/Version-1.0.3-orange)](https://sourceforge.net/p/androidresourcemanager/)
 [![Min JDK Version](https://img.shields.io/badge/Required%20JDK-%2B8-brightgreen)](https://jdk.java.net/java-se-ri/8-MR3)
 [![Download AndroidResourceManager](https://img.shields.io/sourceforge/dt/androidresourcemanager.svg)](https://sourceforge.net/projects/androidresourcemanager/files/latest/download)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
