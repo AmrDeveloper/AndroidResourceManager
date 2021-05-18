@@ -84,12 +84,6 @@ public class ResizeController implements Initializable, OnProgressListener {
         imagesListView.setTooltip(new Tooltip("Image List"));
     }
 
-    private void setPreviewImageDefaultValues() {
-        previewImageView.setImage(mDefaultPreviewImage);
-        previewImageSize.setText("0");
-        previewImageDimensions.setText("0x0");
-    }
-
     @FXML
     private void onImageDragging(DragEvent event) {
         if (event.getDragboard().hasFiles()) {
@@ -188,7 +182,10 @@ public class ResizeController implements Initializable, OnProgressListener {
 
         if(imagesListView.getItems().size() == 0) {
             setPreviewImageDefaultValues();
+            return;
         }
+
+        updatePreviewWithSelectedImage();
     }
 
     @FXML
@@ -258,13 +255,25 @@ public class ResizeController implements Initializable, OnProgressListener {
     }
 
     private void onImageSelected(MouseEvent event) {
-        ObservableList<File> selectedItems = imagesListView.getSelectionModel().getSelectedItems();
-        selectedItems.forEach(file -> {
-            Image image = new Image(file.toURI().toString());
-            previewImageSize.setText(FileUtils.getFormattedFileSize(file));
+        updatePreviewWithSelectedImage();
+    }
+
+    private void setPreviewImageDefaultValues() {
+        previewImageView.setImage(mDefaultPreviewImage);
+        previewImageSize.setText("0");
+        previewImageDimensions.setText("0x0");
+    }
+
+    private void updatePreviewWithSelectedImage() {
+        File selectedItem = imagesListView.getSelectionModel().getSelectedItem();
+        if(selectedItem != null) {
+            Image image = new Image(selectedItem.toURI().toString());
+            previewImageSize.setText(FileUtils.getFormattedFileSize(selectedItem));
             previewImageDimensions.setText(image.getHeight() + "x" + image.getWidth());
             previewImageView.setImage(image);
-        });
+        } else {
+            setPreviewImageDefaultValues();
+        }
     }
 
     @Override
