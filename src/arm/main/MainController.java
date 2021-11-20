@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 
@@ -24,7 +25,17 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        setupActionsTooltip();
+
         loadViewIntoBorderPane("/arm/resize/resize_view", viewBorderPane);
+    }
+
+    private void setupActionsTooltip() {
+        Tooltip.install(resizeImageView, new Tooltip("Resizing"));
+        Tooltip.install(searchImageView, new Tooltip("Searching"));
+        Tooltip.install(colorImageView, new Tooltip("Color"));
+        Tooltip.install(dimensionImageView, new Tooltip("Dimensions"));
+        Tooltip.install(analysisImageView, new Tooltip("Analysis"));
     }
 
     @FXML

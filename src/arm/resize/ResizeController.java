@@ -260,7 +260,7 @@ public class ResizeController implements Initializable, OnProgressListener {
 
     private void setPreviewImageDefaultValues() {
         previewImageView.setImage(mDefaultPreviewImage);
-        previewImageSize.setText("0");
+        previewImageSize.setText("0 bytes");
         previewImageDimensions.setText("0x0");
     }
 
